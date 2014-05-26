@@ -1035,5 +1035,22 @@ font-stretch: condensed;
 letter-spacing: -.03em;
 font-size: 18px;
 }
-
+.documents{
+	margin-right:20%; 
+	margin-left:20%;	
+	text-align:center;
+    margin:50px auto;
+}
+.documents a{
+	margin:0px 30px;
+    display:inline-block;
+    text-decoration:none;
+    color:white;
+}
+.documents img{
+	width: 120px;
+	height: 120px;
+	/*padding-left: 25px;
+*/
+}
 

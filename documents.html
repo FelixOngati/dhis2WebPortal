@@ -73,23 +73,8 @@
 
         }
         xhr.send();
-    }
-
- /*  function getBargraph(Idindicator){  
-   var id="LW0O27b7TdD"; 	
-   // var url="http://localhost:8080/dhis/api/charts/"+idindicator+"/data";
-	var url="http://localhost:8080/dhis/api/charts/LW0O27b7TdD/data";
-	var output='';
-	output+= '<img src='+url+'/>';
-	var div = document.getElementById('chartDiv1');	
-          div.innerHTML = output;
-        };*/              
-            
-
-  
-
-    </script>
-
+    } 
+    </script>   
 
 
 </head>
@@ -124,20 +109,23 @@
         
       <div class="grid1_of_3_map">
             <div class="btn_style bg">
-                <h4>Map</h4>
-            </div>
-            <div class="menu_box_list">
-              </div>  
-                <div class="clear">
-				</div>
-            
+                <h4>Documents</h4>
+            </div> 
+            <div class="documents" id="docs">               
+            </div>          
             
         </div>
         </div><!--end of bargraph-->
-    </div>
+    </div>        
+    <script type="text/javascript">
+    var container = document.getElementById("docs");
+    var limit = 10;
+    for (var i = 0; i < limit; i++) {
+        var newImage = '<a href=""><img src="images/image1.png"/><div class="caption">Trying a very long name</div></a>';
+        //var newImage = <option data-img-src="http://placekitten.com/220/200" value="1">Cute Kitten 1</option>
+        container.innerHTML += newImage;
+    };
+    </script>
 
-        <div class="clear"></div>            
-   
-    
 </body>
 </html>
