@@ -1042,8 +1042,11 @@ font-size: 18px;
 	margin-right:20%; 
 	margin-left:20%;	
 	text-align:center;
-    margin:50px auto;
+    margin:10px auto;
+    height: 43%;
+    width: 100%;
 }
+
 .documents a{
 	margin:0px 30px;
     display:inline-block;
@@ -1053,4 +1056,7 @@ font-size: 18px;
 .documents img{
 	width: 120px;
 	height: 120px;
+}
+#fallback{
+	color: white;
 }

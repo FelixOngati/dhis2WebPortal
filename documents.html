@@ -13,8 +13,32 @@
 <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
 <script src="js/OpenLayers.js"></script>
 <script src="js/map.js"></script>
+<script type="text/javascript" src="js/pdfobject.js"></script>
 
 <script>
+    function embedPDF(){
+        var back = document.getElementById("fallback");
+        var label ="Back";
+        var myPDF = new PDFObject({
+          url: 'retour1.pdf',
+          pdfOpenParams: {   
+            navpanes: 0,
+            toolbar: 0,
+            statusbar: 0,
+            view: "FitV"    
+            }
+        }).embed('docs'); 
+        back.innerHTML = label;        
+      }
+    function fallback(){
+        var div = document.getElementById("docs");
+        var back = document.getElementById("fallback");
+        var label ="";
+        var update = '<a href="#" onclick="embedPDF()"><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a>';
+        div.innerHTML = update;
+        back.innerHTML = label; 
+    }
+
 
     function getNames(url,theTagName,id,attributeName,attributeHref, displayId){
         var xhr;
@@ -100,20 +124,23 @@
             <div class="btn_style bg">
                 <h4>Documents</h4>
             </div> 
-            <div class="documents" id="docs">               
+            <div>
+            <a href="#" onclick="fallback()" id="fallback"></a>
+            <div class="documents" id="docs">                
+             <a href="#" onclick="embedPDF()"><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a><a href=""><img src="images/image1.png"><div class="caption">Trying a very long name</div></a>              
             </div>          
             
         </div>
         </div><!--end of bargraph-->
     </div>        
     <script type="text/javascript">
-    var container = document.getElementById("docs");
+    /*var container = document.getElementById("docs");
     var limit = 10;
     for (var i = 0; i < limit; i++) {
         var newImage = '<a href=""><img src="images/image1.png"/><div class="caption">Trying a very long name</div></a>';
         //var newImage = <option data-img-src="http://placekitten.com/220/200" value="1">Cute Kitten 1</option>
         container.innerHTML += newImage;
-    };
+    };*/
     </script>
 
 </body>
