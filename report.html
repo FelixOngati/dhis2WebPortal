@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>GroupWork</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/ext-all.js"></script>
+<script src="js/table.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/app.js"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/OpenLayers.js"></script>
+<script src="js/map.js"></script>
+
+<script>
+    function getNames(url,theTagName,attributeName,attributeHref, displayId){
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); // all browsers except IE
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP"); // for IE
+         
+        xhr.open('GET', url, false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {            
+                var items = xhr.responseXML.getElementsByTagName(theTagName);
+                
+                var output = '<ul id="cssmenu">';
+
+                for (var i=0; i<items.length; i++) {
+                    output += '<li id="'+ items[i].getAttribute(attributeName)+ '" onclick="getMyAlert(\''+ items[i].getAttribute(attributeHref)+'/data\')" ><a href="#"><span>'+ items[i].getAttribute(attributeName)+ '</span> <i class="favorite"> </i><div class="clear"></div> </a></li>';
+
+                }
+
+                output += '</ul>';
+         
+              var div = document.getElementById(displayId);
+                 div.innerHTML = output;
+                
+            }
+
+        }
+        xhr.send();
+    }
+
+  
+   function getMyAlert(name){
+        var pdf ='<object width="900" height="900" data="'+name+'"></object>';
+         var div = document.getElementById("pdfdisplay");
+                div.innerHTML = pdf;
+        
+    }
+
+ /*  function getBargraph(Idindicator){  
+   var id="LW0O27b7TdD"; 	
+   // var url="http://localhost:8080/dhis/api/charts/"+idindicator+"/data";
+	var url="http://localhost:8080/dhis/api/charts/LW0O27b7TdD/data";
+	var output='';
+	output+= '<img src='+url+'/>';
+	var div = document.getElementById('chartDiv1');	
+          div.innerHTML = output;
+        };*/              
+            
+
+  
+
+    </script>
+
+
+
+</head>
+<body onLoad="getNames('http://localhost:8080/dhis/api/reports.xml','report','name' ,'href', 'menuItem1')">
+   
+<div class="wrap">
+    <!-- start grids_of_3 -->
+    <div class="grids_of_3">
+    
+        <div class="grid1_of_3_menu">
+            <div class="btn_style bg">
+				<h4>Topics</h4>
+            </div>
+            <div id="menuItem1" class="menu_box_list">
+               
+                <!--<div class="clear"></div>-->
+            </div>
+        </div> 
+		</div>  
+        
+        <div id="left_menu">
+        
+      <div class="grid1_of_3_map">
+            <div class="btn_style bg">
+                <h4>Map</h4>
+            </div>
+            <div div id="pdfdisplay" >
+              </div>  
+                <div class="clear">
+				</div>
+            
+            
+        </div>
+        </div><!--end of bargraph-->
+    </div>
+
+        <div class="clear"></div>            
+   
+    
+</body>
+</html>

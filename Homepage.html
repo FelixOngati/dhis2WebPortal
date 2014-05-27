@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>GroupWork</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/ext-all.js"></script>
+<script src="js/table.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/app.js"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/OpenLayers.js"></script>
+<script src="js/map.js"></script>
+
+<script>
+
+    function getNames(url,theTagName,id,attributeName,attributeHref, displayId){
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); // all browsers except IE
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP"); // for IE
+         
+        xhr.open('GET', url, false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {            
+                var items = xhr.responseXML.getElementsByTagName(theTagName);
+                
+                var output = '<ul id="cssmenu">';
+
+                for (var i=0; i<items.length; i++) {
+                  
+                    output += '<li id="'+ items[i].getAttribute(attributeName)+ '" onclick="getMyAlert(\''+ items[i].getAttribute(id)+'\')" ><a href="#"><span>'+ items[i].getAttribute(attributeName)+ '</span> <i class="favorite"> </i><div class="clear"></div> </a></li>';
+                }
+
+                output += '</ul>';
+         
+              var div = document.getElementById(displayId);
+                 div.innerHTML = output;
+                
+            }
+
+        }
+        xhr.send();
+    }
+
+  
+ function getMyAlert(id){
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); // all browsers except IE
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP"); // for IE
+         var url="http://localhost:8080/dhis/api/indicatorGroups/"+id+".xml";
+        xhr.open('GET', url, false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {            
+                var items = xhr.responseXML.getElementsByTagName('indicator');
+                
+                var output = '<ul id="cssmenu">';
+                var url1="http://localhost:8080/dhis/api/indicatorGroups/";
+
+                for (var i=0; i<items.length; i++) {
+                    // output += '<li id="' + items[i].id + '" class="indicator" onclick="WP.indicatorId = this.id; WP.showChart();">' + items[i].name + '</li>';                  
+                    output += '<li id="'+ items[i].getAttribute('id')+ '" class="indicator" onclick="WP.indicatorId = this.id; WP.showReport()" ><a href="#"><span>'+ items[i].getAttribute('name')+ '</span> <i class="favorite"> </i><div class="clear"></div> </a></li>';
+                    
+                }
+
+                output += '</ul>';
+         
+              var div = document.getElementById('menu_indicator');
+                 div.innerHTML = output;
+                
+            }
+
+        }
+        xhr.send();
+    }
+
+ /*  function getBargraph(Idindicator){  
+   var id="LW0O27b7TdD"; 	
+   // var url="http://localhost:8080/dhis/api/charts/"+idindicator+"/data";
+	var url="http://localhost:8080/dhis/api/charts/LW0O27b7TdD/data";
+	var output='';
+	output+= '<img src='+url+'/>';
+	var div = document.getElementById('chartDiv1');	
+          div.innerHTML = output;
+        };*/              
+            
+
+  
+
+    </script>
+
+
+
+</head>
+<body onLoad="getNames('http://localhost:8080/dhis/api/indicatorGroups.xml', 'indicatorGroup','id','name' ,'href', 'menuItem1')">
+    
+<div class="wrap">
+    <!-- start grids_of_3 -->
+    <div class="grids_of_3">
+    
+        <div class="grid1_of_3_menu">
+            <div class="btn_style bg">
+				<h4>Topics</h4>
+            </div>
+            <div id="menuItem1" class="menu_box_list">
+               
+                <!--<div class="clear"></div>-->
+            </div>
+        </div> 
+		</div>  
+        
+        <div id="left_menu">
+        
+      <div class="grid1_of_3_map">
+            <div class="btn_style bg">
+                <h4>Map</h4>
+            </div>
+            <div class="menu_box_list">
+              </div>  
+                <div class="clear">
+				</div>
+            
+            
+        </div>
+        </div><!--end of bargraph-->
+    </div>
+
+        <div class="clear"></div>            
+   
+    
+</body>
+</html>

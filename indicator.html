@@ -1,0 +1,219 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>GroupWork</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'/>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/ext-all.js"></script>
+<script src="js/table.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/app.js"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/OpenLayers.js"></script>
+<script src="js/map.js"></script>
+
+<script>
+
+    function getNames(url,theTagName,id,attributeName,attributeHref, displayId){
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); // all browsers except IE
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP"); // for IE
+         
+        xhr.open('GET', url, false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {            
+                var items = xhr.responseXML.getElementsByTagName(theTagName);
+                
+                var output = '<ul id="cssmenu">';
+
+                for (var i=0; i<items.length; i++) {
+                  
+                    output += '<li id="'+ items[i].getAttribute(attributeName)+ '" onclick="getMyAlert(\''+ items[i].getAttribute(id)+'\')" ><a href="#"><span>'+ items[i].getAttribute(attributeName)+ '</span> <i class="favorite"> </i><div class="clear"></div> </a></li>';
+                }
+
+                output += '</ul>';
+         
+              var div = document.getElementById(displayId);
+                 div.innerHTML = output;
+                
+            }
+
+        }
+        xhr.send();
+    }
+
+  
+ function getMyAlert(id){
+        var xhr;
+        if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); // all browsers except IE
+        else xhr = new ActiveXObject("Microsoft.XMLHTTP"); // for IE
+         var url="http://localhost:8080/dhis/api/indicatorGroups/"+id+".xml";
+        xhr.open('GET', url, false);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState===4 && xhr.status===200) {            
+                var items = xhr.responseXML.getElementsByTagName('indicator');
+                
+                var output = '<ul id="cssmenu">';
+                var url1="http://localhost:8080/dhis/api/indicatorGroups/";
+
+                for (var i=0; i<items.length; i++) {
+                    // output += '<li id="' + items[i].id + '" class="indicator" onclick="WP.indicatorId = this.id; WP.showChart();">' + items[i].name + '</li>';                  
+                    output += '<li id="'+ items[i].getAttribute('id')+ '" class="indicator" onclick="WP.indicatorId = this.id; WP.showReport()" ><a href="#"><span>'+ items[i].getAttribute('name')+ '</span> <i class="favorite"> </i><div class="clear"></div> </a></li>';
+                    
+                }
+
+                output += '</ul>';
+         
+              var div = document.getElementById('menu_indicator');
+                 div.innerHTML = output;
+                
+            }
+
+        }
+        xhr.send();
+    }
+
+ /*  function getBargraph(Idindicator){  
+   var id="LW0O27b7TdD"; 	
+   // var url="http://localhost:8080/dhis/api/charts/"+idindicator+"/data";
+	var url="http://localhost:8080/dhis/api/charts/LW0O27b7TdD/data";
+	var output='';
+	output+= '<img src='+url+'/>';
+	var div = document.getElementById('chartDiv1');	
+          div.innerHTML = output;
+        };*/              
+            
+
+  
+
+    </script>
+
+
+
+</head>
+<body onLoad="getNames('http://localhost:8080/dhis/api/indicatorGroups.xml', 'indicatorGroup','id','name' ,'href', 'menuItem1')">
+  
+<div class="wrap">
+    <!-- start grids_of_3 -->
+    <div class="grids_of_3">
+    
+        <div class="grid1_of_3_menu">
+            <div class="grid_img">
+                <img src="images/pic1.jpg" alt=""/>
+                       
+            </div>
+            <div id="menuItem1" class="menu_box_list">
+               
+                <!--<div class="clear"></div>-->
+            </div>
+        </div>    
+        
+        <div id="left_menu">
+          <div class="grid1_of_3_menuitems">
+            <div class="btn_style bg">
+                <h4>IndicatorGroups</h4>
+            </div>
+            <div id="menu_indicator" class="menu_box_list">
+                
+                <div class="clear"></div>
+            </div>
+            
+        </div><!--end of Menuitems-->
+        <div class="grid1_of_3_bargraph">
+            <div class="btn_style bg1">
+                <h4>Bargraph</h4>
+            </div>
+                <div id ="chartDiv1" class="chart">
+            <canvas id="chartDiv1" height="250" width="295" style="margin-top: 30px;"></canvas>
+                
+            
+
+        </div>
+        <div class="clear"></div>            
+       </div><!--end of chart-->
+        </div><!--end of bargraph-->
+
+        <div class="grid1_of_3_menuitems">
+            <div class="btn_style bg">
+                <h4>Table</h4>
+            </div>
+            <div class="menu_box_list">
+                
+                <div class="clear"></div>
+            </div>
+            
+        </div><!--end of Menuitems-->
+        <div class="grid1_of_3_bargraph">
+            <div class="btn_style bg1">
+                <h4>Linegraph</h4>
+            </div>
+                <div class="chart">
+            <canvas id="canvas" height="70%" width="100%" style="margin-top: 30px;"></canvas>
+                <script>
+                        /*var lineChartData = {
+                        labels : ["January","February","March","April","May","June","July"],
+                        datasets : [
+                            {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                pointColor : "rgba(220,220,220,1)",
+                                pointStrokeColor : "#fff",
+                                data : [65,59,90,81,56,55,40]
+                            },
+                            {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                pointColor : "rgba(151,187,205,1)",
+                                pointStrokeColor : "#fff",
+                                data : [28,48,40,19,96,27,100]
+                            }
+                        ]
+                        
+                    }*/
+                 DHIS.getChart({
+				url: "http://localhost:8080/dhis/api/charts",
+				el: 'canvas',
+				width: centerRegion.getWidth() - 120,
+				height: 400,
+				columns: [{
+					dimension: 'in',
+					items: [{id: "LW0O27b7TdD"}]
+				}],
+				rows: [{
+					dimension: 'ou',
+					items: [{id: 'LEVEL-2'}]
+				}],
+				filters: [{
+					dimension: 'pe',
+					items: [{id: 'THIS_YEAR'}]
+				}],
+				hideTitle: true,
+				hideLegend: true
+			});
+            
+                var myLine = new Chart(document.getElementById("canvas").getContext("2d")).Line(lineChartData);
+                
+                </script>
+            
+
+        </div>
+        <div class="clear"></div>            
+    </div><!--end of chart-->
+    </div><!--end of bargraph-->
+
+    <div class="grid1_of_3_map">
+            <div class="btn_style bg">
+                <h4>Map</h4>
+            </div>
+            <div class="menu_box_list">
+                
+                <div class="clear"></div>
+            </div>
+            
+        </div><!--end of map-->
+ </div><!--end of left_menu-->
+
+</body>
+</html>
