@@ -892,11 +892,7 @@ small {
 /***** Media Quries *****/
 @media only screen and (max-width: 1366px) {
 	.wrap{
-<<<<<<< HEAD
-		width:95%;
-=======
 		width:100%;
->>>>>>> 8189ec4a369d1f7e4c4b814245ab406a8fb36587
 	}
 	.border {
 		width: 90px;
@@ -904,11 +900,7 @@ small {
 }
 @media only screen and (max-width: 1280px) {
 	.wrap{
-<<<<<<< HEAD
-		width:95%;
-=======
 		width:100%;
->>>>>>> 8189ec4a369d1f7e4c4b814245ab406a8fb36587
 	}
 	.border {
 		width: 85px;
@@ -927,11 +919,7 @@ small {
 }
 @media only screen and (max-width: 768px) {
 	.wrap{
-<<<<<<< HEAD
-		width:95%;
-=======
 		width:100%;
->>>>>>> 8189ec4a369d1f7e4c4b814245ab406a8fb36587
 	}
 	.grid1_of_3 {
 		float: none;
@@ -943,11 +931,7 @@ small {
 }
 @media only screen and (max-width: 640px){
 	.wrap{
-<<<<<<< HEAD
-		width:95%;
-=======
 		width:100%;
->>>>>>> 8189ec4a369d1f7e4c4b814245ab406a8fb36587
 	}
 	.grid_list {
 		top: -200px;
@@ -1051,7 +1035,9 @@ font-stretch: condensed;
 letter-spacing: -.03em;
 font-size: 18px;
 }
-<<<<<<< HEAD
+.x-border-box{
+	height: 100%;
+}
 .documents{
 	margin-right:20%; 
 	margin-left:20%;	
@@ -1067,11 +1053,4 @@ font-size: 18px;
 .documents img{
 	width: 120px;
 	height: 120px;
-	/*padding-left: 25px;
-*/
-=======
-.x-border-box{
-	height: 100%;
->>>>>>> 8189ec4a369d1f7e4c4b814245ab406a8fb36587
 }
-
